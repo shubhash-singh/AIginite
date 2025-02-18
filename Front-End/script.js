@@ -3,6 +3,40 @@ const modal = document.getElementById('registrationModal');
 const closeBtn = document.getElementsByClassName('close')[0];
 const form = document.getElementById('registrationForm');
 
+// Mouse movement for hero content glow effect
+document.addEventListener('mousemove', (e) => {
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+        const rect = heroContent.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        heroContent.style.setProperty('--mouse-x', `${x}%`);
+        heroContent.style.setProperty('--mouse-y', `${y}%`);
+    }
+});
+
+// Particle effect
+function createParticles() {
+    const particles = document.createElement('div');
+    particles.className = 'particles';
+    document.querySelector('.hero').appendChild(particles);
+
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.width = Math.random() * 3 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animation = `float ${Math.random() * 3 + 2}s infinite`;
+        particle.style.opacity = Math.random() * 0.5;
+        particles.appendChild(particle);
+    }
+}
+
+// Initialize particles
+createParticles();
+
 function openRegistration() {
     modal.style.display = "block";
 }
